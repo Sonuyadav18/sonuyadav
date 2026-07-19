@@ -5,7 +5,35 @@
 <style>
 body{margin:0;font-family:Arial;background:#081b3a;color:#fff}header{padding:18px;background:#0d2d63;display:flex;justify-content:space-between}nav a{color:#fff;margin:0 10px;text-decoration:none}.hero,.sec{padding:60px 10%;}.btn{background:#6c63ff;color:#fff;padding:12px 18px;border-radius:6px;text-decoration:none}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}.card{background:#142b59;padding:18px;border-radius:10px}footer{text-align:center;padding:20px;background:#0d2d63}
 </style>
-        <link ref="stylesheet" herf="style.css">
+     
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:#081b3a;color:#fff;line-height:1.6}
+header{position:sticky;top:0;background:#0d2d63;padding:18px 8%;display:flex;justify-content:space-between;align-items:center;z-index:99}
+nav a{color:#fff;text-decoration:none;margin-left:20px;transition:.3s}
+nav a:hover{color:#8ab4ff}
+.hero{padding:100px 10%;min-height:90vh;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(135deg,#081b3a,#123b7a)}
+.hero h1{font-size:52px;margin-bottom:10px}
+.hero h2{color:#8ab4ff;margin-bottom:20px}
+.btn{display:inline-block;padding:14px 26px;background:#6c63ff;color:#fff;text-decoration:none;border-radius:8px;transition:.3s}
+.btn:hover{transform:translateY(-3px)}
+.sec{padding:70px 10%}
+.sec h2{text-align:center;margin-bottom:35px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.card{background:#132c5b;border:1px solid rgba(255,255,255,.1);padding:22px;border-radius:12px;transition:.3s}
+.card:hover{transform:translateY(-8px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+footer{background:#0d2d63;text-align:center;padding:20px}
+input,textarea{width:100%;padding:12px;margin:10px 0;border:none;border-radius:8px}
+button{padding:12px 20px;background:#6c63ff;color:#fff;border:none;border-radius:8px;cursor:pointer}
+button:hover{opacity:.9}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-thumb{background:#6c63ff;border-radius:10px}
+@media(max-width:768px){
+header{flex-direction:column}
+nav{margin-top:10px}
+.hero h1{font-size:36px}
+.sec{padding:50px 6%}
+}
+
 </head>
 <body>
 <header><h2>Sonu Yadav</h2><nav><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#contact">Contact</a></nav></header>
@@ -27,5 +55,96 @@ body{margin:0;font-family:Arial;background:#081b3a;color:#fff}header{padding:18p
 </div></section>
 <section id="contact" class="sec"><h2>Contact</h2><p>📞7289978718<br>✉️ sonuwithyadav@gmail.com</p></section>
 <footer>© 2026 Sonu Yadav | Data Analytics Portfolio</footer>
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+    // Smooth Scrolling
+    const links = document.querySelectorAll("nav a");
+
+    links.forEach(link => {
+        link.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const target = document.querySelector(this.getAttribute("href"));
+
+            if (target) {
+                target.scrollIntoView({
+                    behavior: "smooth"
+                });
+            }
+        });
+    });
+
+    // Scroll Animation
+    const observer = new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
+
+            }
+
+        });
+
+    }, {
+        threshold: 0.2
+    });
+
+    document.querySelectorAll(".card, .section").forEach((el) => {
+
+        el.style.opacity = "0";
+        el.style.transform = "translateY(40px)";
+        el.style.transition = "all 0.6s ease";
+
+        observer.observe(el);
+
+    });
+
+    // Back To Top Button
+    const topBtn = document.createElement("button");
+
+    topBtn.innerHTML = "↑";
+
+    topBtn.style.position = "fixed";
+    topBtn.style.bottom = "20px";
+    topBtn.style.right = "20px";
+    topBtn.style.width = "45px";
+    topBtn.style.height = "45px";
+    topBtn.style.border = "none";
+    topBtn.style.borderRadius = "50%";
+    topBtn.style.background = "#6c63ff";
+    topBtn.style.color = "#fff";
+    topBtn.style.fontSize = "20px";
+    topBtn.style.cursor = "pointer";
+    topBtn.style.display = "none";
+    topBtn.style.boxShadow = "0 5px 15px rgba(0,0,0,0.3)";
+    topBtn.style.zIndex = "999";
+
+    document.body.appendChild(topBtn);
+
+    window.addEventListener("scroll", () => {
+
+        if (window.scrollY > 300) {
+            topBtn.style.display = "block";
+        } else {
+            topBtn.style.display = "none";
+        }
+
+    });
+
+    topBtn.addEventListener("click", () => {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+});
+        
   <script src="script.js"></script>
 </body></html>
